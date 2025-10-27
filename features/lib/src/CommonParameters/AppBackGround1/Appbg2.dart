@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:TURF_TOWN_/src/Pages/Otp.dart';
 import 'package:TURF_TOWN_/src/CommonParameters/AppBackGround1/Appbg1.dart';
+import 'package:TURF_TOWN_/src/Pages/ScoreCardPage.dart';
 
-class Board extends StatefulWidget {
-  const Board({super.key});
+class Appbg2 extends StatefulWidget {
+  const Appbg2({super.key});
 
   @override
-  State<Board> createState() => _BoardState();
+  State<Appbg2> createState() => _BoardState();
 }
 
-class _BoardState extends State<Board> {
+class _BoardState extends State<Appbg2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class _BoardState extends State<Board> {
                 SizedBox(height: 35),
                 Row(
                   // crossAxisAlignment: CrossAxisAlignment.baseline,
-                   textBaseline: TextBaseline.alphabetic,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 3.0),

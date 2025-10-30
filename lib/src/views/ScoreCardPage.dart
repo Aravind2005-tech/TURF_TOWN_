@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:TURF_TOWN_/src/Pages/Otp.dart';
-import 'package:TURF_TOWN_/src/CommonParameters/AppBackGround1/Appbg1.dart';
-import 'package:TURF_TOWN_/src/Pages/ScoreCardPage.dart';
+import 'package:turf_cricket/src/Pages/Otp.dart';
+import 'package:turf_cricket/src/CommonParameters/AppBackGround1/Appbg1.dart';
 
-class Appbg2 extends StatefulWidget {
-  const Appbg2({super.key});
+class Board extends StatefulWidget {
+  const Board({super.key});
 
   @override
-  State<Appbg2> createState() => _BoardState();
+  State<Board> createState() => _BoardState();
 }
 
-class _BoardState extends State<Appbg2> {
+class _BoardState extends State<Board> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +26,7 @@ class _BoardState extends State<Appbg2> {
                 SizedBox(height: 35),
                 Row(
                   // crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
+                   textBaseline: TextBaseline.alphabetic,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 3.0),
@@ -35,7 +34,7 @@ class _BoardState extends State<Appbg2> {
                         icon: Icon(Icons.menu),
                         color: Colors.white,
                         iconSize: 30.0,
-                        tooltip: 'Verify OTP',
+                        tooltip: 'menu',
                         onPressed: () {
                           Navigator.push(
                             context,

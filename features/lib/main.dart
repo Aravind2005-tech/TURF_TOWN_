@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:TURF_TOWN_/src/Pages/Phone_no.dart';
+
 import 'package:TURF_TOWN_/src/Pages/ScoreCardPage.dart';
 void main() {
   runApp(const FigmaToCodeApp());

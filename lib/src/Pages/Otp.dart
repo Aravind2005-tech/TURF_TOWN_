@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:TURF_TOWN_/src/CommonParameters/AppBackGround1/Appbg1.dart';
-import 'package:TURF_TOWN_/src/Pages/ScoreCardPage.dart';
+import 'package:TURF_TOWN_/src/views/ScoreCard.dart';
 
 class OtpVerification extends StatefulWidget {
   final String phoneNumber;

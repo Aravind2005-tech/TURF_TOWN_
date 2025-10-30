@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turf_cricket/src/Pages/Otp.dart';
-import 'package:turf_cricket/src/CommonParameters/AppBackGround1/Appbg1.dart';
-import 'package:turf_cricket/src/Pages/ScoreCardPage.dart';
+import 'package:TURF_TOWN_/src/Pages/Otp.dart';
+import 'package:TURF_TOWN_/src/CommonParameters/AppBackGround1/Appbg1.dart';
+import 'package:TURF_TOWN_/src/views/ScoreCard.dart';
 
 class Appbg2 extends StatefulWidget {
   const Appbg2({super.key});

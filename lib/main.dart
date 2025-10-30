@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:TURF_TOWN_/src/Pages/ScoreCardPage.dart';
+import 'package:TURF_TOWN_/src/Pages/Phone_no.dart';
+import 'package:TURF_TOWN_/src/Pages/Otp.dart';
+import 'package:TURF_TOWN_/src/views/ScoreCard.dart';
 void main() {
   runApp(const FigmaToCodeApp());
 }
@@ -14,7 +15,7 @@ class FigmaToCodeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:Board() ,
+      home: PhoneNumberPage(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(

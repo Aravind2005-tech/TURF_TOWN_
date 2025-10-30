@@ -10,6 +10,7 @@ void main() {
 class FigmaToCodeApp extends StatelessWidget {
   const FigmaToCodeApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -25,13 +25,19 @@ class ScoreController extends ChangeNotifier {
   }
 
   // Add extras (Wide or No Ball)
+// Add extras (Wide or No Ball)
   void addExtra(String type, int runs) {
-    // 1 for the extra + runs made by batsman
+    // +1 for the extra itself (wide/no ball) + additional runs if any
     int extraRuns = 1 + runs;
     _runs += extraRuns;
+
+    // Do not count this as a legal delivery
     _currentOver.add('$type+$runs');
+
+    // Over not completed, since extras are not legal balls
     notifyListeners();
   }
+
 
   // Add a wicket (legal delivery)
   void addWicket({bool isLegal = true}) {

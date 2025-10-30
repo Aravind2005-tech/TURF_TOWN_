@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:TURF_TOWN_/src/CommonParameters/AppBackGround1/Appbg1.dart';
 import 'package:TURF_TOWN_/src/views/ScoreCard.dart';
+import 'package:TURF_TOWN_/src/views/Home.dart';
 
 class OtpVerification extends StatefulWidget {
   final String phoneNumber;
@@ -123,7 +124,7 @@ class _OtpVerificationState extends State<OtpVerification> {
               tooltip: 'Verify OTP',
               onPressed: () {
                 Navigator.push(context,
-                MaterialPageRoute(builder: (context)=>Board()));
+                MaterialPageRoute(builder: (context)=>Home()));
                   // Proceed with OTP verification logic here
                 }
             ),

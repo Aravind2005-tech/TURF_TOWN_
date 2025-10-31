@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:TURF_TOWN_/src/CommonParameters/AppBackGround1/Appbg1.dart';
-import 'package:TURF_TOWN_/src/Widgets/Navigation_bar.dart';
-// --- Data Models (for easier state management) ---
+
+// Placeholder classes for missing imports
+class Appbg1 {
+  static const LinearGradient mainGradient = LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Color(0xFF140088),
+        Color(0xFF000000),
+      ],
+      stops: [0.0,0.3]
+  );
+}
+
+// --- Data Models ---
 class TurfItem {
   final String imagePath;
   final String title;
@@ -20,13 +32,153 @@ class TurfItem {
   String get id => title;
 }
 
+// --- CUSTOM NAVIGATION BAR ---
+class Navigation_bar extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTap;
 
-// --- Static Gradient and Colors (Unchanged) ---
+  const Navigation_bar({
+    Key? key,
+    required this.currentIndex,
+    required this.onTap,
+  }) : super(key: key);
 
+  Widget _buildNavItem(IconData icon, String label, int index) {
+    bool isSelected = currentIndex == index;
+    Color unselectedColor = Colors.grey.shade400;
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => onTap(index),
+        child: Container(
+          height: 90,
+          color: Colors.transparent,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.center,
+            children: [
+              // Unselected State (faded)
+              AnimatedOpacity(
+                duration: const Duration(milliseconds: 200),
+                opacity: isSelected ? 0.0 : 1.0,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(height: 10),
+                    Icon(icon, size: 24, color: unselectedColor),
+                    const SizedBox(height: 4),
+                    Text(
+                      label,
+                      style: TextStyle(color: unselectedColor, fontSize: 12),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              // Selected State (elevated circle)
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                bottom: isSelected ? 25 : 10,
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  opacity: isSelected ? 1.0 : 0.0,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        height: 64,
+                        width: 64,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: const Color(0xFF15008A),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              )
+                            ]),
+                        child: Icon(icon, color: Colors.white, size: 30),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        label,
+                        style: TextStyle(
+                          color: isSelected ? Colors.white : unselectedColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 90,
+      margin: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // Background Bar
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 70,
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFF140088),
+                borderRadius: BorderRadius.circular(50.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.4),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  )
+                ],
+              ),
+            ),
+          ),
+          // Items Row
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 90,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildNavItem(Icons.stadium_outlined, "Venue", 0),
+                _buildNavItem(Icons.history, "Recently Played", 1),
+                _buildNavItem(Icons.home_outlined, "Home", 2),
+                _buildNavItem(Icons.bluetooth, "Connection", 3),
+                _buildNavItem(Icons.notifications_outlined, "Alerts", 4),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// --- Main Stateful Widget with Favorites Logic ---
 class CricketScorerHeader extends StatefulWidget {
   const CricketScorerHeader({super.key});
-
-  static Color? get searchIconColor => null;
 
   @override
   State<CricketScorerHeader> createState() => _CricketScorerHeaderState();
@@ -41,6 +193,7 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
   static const Color favouritesContainerColor = Color(0xFFD9D9D9);
 
   int _selectedIndex = 2;
+
   // --- 1. Master List of all Turfs ---
   final List<TurfItem> _allTurfs = [
     TurfItem(imagePath: 'assets/images/cricket_ground_1.png.jpg', title: 'Goat Sports...', subtitle: 'Lawspet', rating: '4.5'),
@@ -55,9 +208,9 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
   ];
 
   // --- 2. State List for Favorites (only tracking the IDs/titles) ---
-  final List<String> _favoriteTurfIds = ['Goat Sports...', 'The Sports S...', 'Providence Turf']; // Initial favorites
+  final List<String> _favoriteTurfIds = ['Goat Sports...', 'The Sports S...', 'Providence Turf'];
 
-  // --- 3. Toggle Function ---
+  // --- 3. Toggle Function: Adds/removes ID and triggers UI rebuild ---
   void _toggleFavorite(String turfId) {
     setState(() {
       if (_favoriteTurfIds.contains(turfId)) {
@@ -71,25 +224,23 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
   @override
   Widget build(BuildContext context) {
 
-    // Filter the master list into the two sections
+    // 1. Filtered list for the top row (only includes favorited items)
     final List<TurfItem> favoriteCards = _allTurfs.where((turf) => _favoriteTurfIds.contains(turf.id)).toList();
-    final List<TurfItem> gridTurfs = _allTurfs.where((turf) => !_favoriteTurfIds.contains(turf.id)).toList();
+
+    // 2. The grid will now display ALL turfs. We removed the filtering here.
 
     return Scaffold(
-      extendBody: true, // This is perfect for a custom nav bar
+      extendBody: true,
 
-      // 2. ADD THE bottomNavigationBar PROPERTY
       bottomNavigationBar: Navigation_bar(
         currentIndex: _selectedIndex,
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
           });
-          // You can add other logic here, like navigating
-          // to different pages using a PageView or Navigator
         },
       ),
-  body:
+      body:
 
       Container(
         decoration: const BoxDecoration(
@@ -97,7 +248,7 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
         ),
         child: Column(
           children: [
-            // --- HEADER SECTION (Unchanged) ---
+            // --- HEADER SECTION ---
             SafeArea(
               bottom: false,
               child: Padding(
@@ -143,7 +294,7 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
               ),
             ),
 
-            // --- SEARCH BAR (Unchanged Dimensions) ---
+            // --- SEARCH BAR ---
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 16.0),
               child: Center(
@@ -203,9 +354,9 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
 
             const SizedBox(height: 16.0),
 
-            // --- FAVORITES LIST (Built dynamically from state) ---
+            // --- FAVORITES LIST (ListView.builder) ---
             SizedBox(
-              height: 180,
+              height: favoriteCards.isEmpty ? 0 : 180, // Hide list if empty
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -218,7 +369,7 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
                       imagePath: item.imagePath,
                       title: item.title,
                       subtitle: item.subtitle,
-                      // FAVORITES can also be unfavorited
+                      // Tap here removes it from favorites (moves it back to grid)
                       onToggleFavorite: () => _toggleFavorite(item.id),
                     ),
                   );
@@ -226,7 +377,7 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
               ),
             ),
 
-            // --- DIVIDER 2 (Adjusted spacing to 2.0) ---
+            // --- DIVIDER 2 ---
             const SizedBox(height: 2.0),
             Center(
               child: SizedBox(
@@ -238,7 +389,7 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
               ),
             ),
 
-            // --- GRID VIEW (Shows non-favorites) ---
+            // --- GRID VIEW (Shows ALL turfs) ---
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
@@ -249,15 +400,20 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
                     mainAxisSpacing: 16.0,
                     childAspectRatio: 0.9,
                   ),
-                  itemCount: gridTurfs.length,
+                  // *** CHANGE 1: Use the master list for the grid view ***
+                  itemCount: _allTurfs.length,
                   itemBuilder: (context, index) {
-                    final item = gridTurfs[index];
+                    final item = _allTurfs[index];
+
+                    // *** CHANGE 2: Dynamically check if the current item is a favorite ***
+                    final bool isFavorite = _favoriteTurfIds.contains(item.id);
+
                     return TurfCard(
                       imagePath: item.imagePath,
                       title: item.title,
                       subtitle: item.subtitle,
                       rating: item.rating,
-                      isFavorite: false, // Grid items are non-favorites
+                      isFavorite: isFavorite, // Pass the correct state to show the icon
                       onToggleFavorite: () => _toggleFavorite(item.id),
                     );
                   },
@@ -271,7 +427,7 @@ class _CricketScorerHeaderState extends State<CricketScorerHeader> {
   }
 }
 
-// --- SearchBarWidget (Unchanged) ---
+// --- SearchBarWidget ---
 class SearchBarWidget extends StatelessWidget {
   final Color color;
   final Color iconColor;
@@ -300,7 +456,7 @@ class SearchBarWidget extends StatelessWidget {
         children: <Widget>[
           Icon(
             Icons.search,
-            color: CricketScorerHeader.searchIconColor,
+            color: iconColor,
             size: 18.0,
           ),
           const Expanded(
@@ -312,7 +468,7 @@ class SearchBarWidget extends StatelessWidget {
   }
 }
 
-// --- FavouriteCard (Modified to accept onToggleFavorite) ---
+// --- FavouriteCard (Always filled heart, removes from list on tap) ---
 class FavouriteCard extends StatelessWidget {
   final String imagePath;
   final String title;
@@ -357,7 +513,7 @@ class FavouriteCard extends StatelessWidget {
                   width: double.infinity,
                   height: double.infinity,
                 ),
-                // Heart icon is always red and filled here, but clickable
+                // Filled heart, tap to UN-favorite (remove from this list)
                 Positioned(
                   top: 8,
                   right: 8,
@@ -407,14 +563,15 @@ class FavouriteCard extends StatelessWidget {
   }
 }
 
-// --- TurfCard (Modified to show favorite state and be clickable) ---
+// --- TurfCard (Heart icon reflects isFavorite status) ---
 class TurfCard extends StatelessWidget {
   final String imagePath;
   final String title;
   final String subtitle;
   final String rating;
-  final bool isFavorite; // New flag
-  final VoidCallback? onToggleFavorite; // New callback
+  // This state is crucial: it determines which icon to show.
+  final bool isFavorite;
+  final VoidCallback? onToggleFavorite;
 
   const TurfCard({
     super.key,
@@ -422,7 +579,7 @@ class TurfCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.rating,
-    this.isFavorite = false,
+    required this.isFavorite, // Now required to reflect accurate state
     this.onToggleFavorite,
   });
 
@@ -448,12 +605,12 @@ class TurfCard extends StatelessWidget {
                   width: double.infinity,
                   height: double.infinity,
                 ),
-                // Heart icon changes based on isFavorite
+                // Heart icon toggles between filled (if isFavorite is true) and outline (if false)
                 Positioned(
                   top: 8,
                   right: 8,
                   child: GestureDetector(
-                    onTap: onToggleFavorite, // Click to toggle favorite status
+                    onTap: onToggleFavorite,
                     child: Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(

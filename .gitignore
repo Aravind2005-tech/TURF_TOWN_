@@ -1,3 +1,7 @@
+# ============================
+# Flutter / Dart Project Ignore
+# ============================
+
 # Miscellaneous
 *.class
 *.lock
@@ -6,8 +10,15 @@
 *.swp
 .buildlog/
 .history
-
-
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-preload-cache/
+build/
+**/generated_plugin_registrant.dart
+**/doc/api/
 
 # Flutter repo-specific
 /bin/cache/
@@ -22,29 +33,12 @@
 /dev/docs/flutter.docs.zip
 /dev/docs/lib/
 /dev/docs/pubspec.yaml
-/dev/integration_tests/**/xcuserdata
-/dev/integration_tests/**/Pods
 /packages/flutter/coverage/
 version
 analysis_benchmark.json
 
 # packages file containing multi-root paths
 .packages.generated
-
-# Flutter/Dart/Pub related
-**/doc/api/
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-**/generated_plugin_registrant.dart
-.packages
-.pub-preload-cache/
-.pub/
-build/
-flutter_*.png
-linked_*.ds
-unlinked.ds
-unlinked_spec.ds
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -117,3 +111,77 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+
+# ============================
+# Environment & Secret Files
+# ============================
+
+# Environment configs
+.env
+.env.*
+*.env
+config.json
+config_dev.json
+config_prod.json
+
+# Local databases (for ObjectBox, SQLite, etc.)
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+*.bak
+
+# Cache and temporary files
+*.tmp
+*.temp
+*.cache
+*.DS_Store
+Thumbs.db
+
+# ============================
+# Backend (PHP / XAMPP) Ignore
+# ============================
+
+# PHP runtime & cache files
+*.log
+*.cache
+vendor/
+composer.lock
+
+# Local server settings
+.htaccess
+php.ini
+*.key
+*.pem
+*.crt
+
+# Database dumps
+*.sql
+*.sql.gz
+*.db
+*.db-journal
+
+# ============================
+# IDE and Editor Files
+# ============================
+
+# VS Code
+.vscode/
+.idea/
+*.iml
+
+# Android Studio
+.cxx/
+local.properties
+*.ipr
+*.iws
+
+# ============================
+# Flutter Assets
+# ============================
+
+flutter_*.png
+linked_*.ds
+unlinked.ds
+unlinked_spec.ds
+assets/.DS_Store

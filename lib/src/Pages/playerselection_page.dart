@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../CommonParameters/AppBackGround1/Appbg1.dart';
 import '../views/ScoreCardPage.dart';
@@ -25,7 +26,7 @@ class _SelectPlayersPageState extends State<SelectPlayersPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
+    // screenHeight was unused and removed to avoid analyzer warning
 
     return Scaffold(
       body: Stack(
@@ -82,7 +83,22 @@ class _SelectPlayersPageState extends State<SelectPlayersPage> {
                       Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.headphones),
+                            icon: SvgPicture.asset(
+                              'assets/images/ix_support.svg',
+                              width: 30,
+                              height: 30,
+                              // use colorFilter for flutter_svg v2 to tint the SVG
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
+                              placeholderBuilder:
+                                  (context) => const Icon(
+                                    Icons.headset,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
+                            ),
                             color: Colors.white,
                             iconSize: 30.0,
                             tooltip: 'Audio',
@@ -91,7 +107,12 @@ class _SelectPlayersPageState extends State<SelectPlayersPage> {
                             },
                           ),
                           IconButton(
-                            icon: Icon(Icons.settings),
+                            icon: Image.asset(
+                              'assets/images/setting_icon.png',
+                              width: 26,
+                              height: 26,
+                              fit: BoxFit.contain,
+                            ),
                             color: Colors.white,
                             iconSize: 30.0,
                             tooltip: 'Settings',

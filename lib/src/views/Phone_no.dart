@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:turf_cricket/src/CommonParameters/AppBackGround1/Appbg1.dart';
-import 'package:turf_cricket/src/CommonParameters/Validators.dart';
-import 'package:turf_cricket/src/Pages/Otp.dart';
+
+import '../CommonParameters/AppBackGround1/Appbg1.dart';
+import '../CommonParameters/Validators.dart';
+import '../Pages/Otp.dart';
+
 
 class PhoneNumberPage extends StatefulWidget {
   const PhoneNumberPage({super.key});

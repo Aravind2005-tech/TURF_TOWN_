@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turf_cricket/src/CommonParameters/AppBackGround1/Appbg1.dart';
-import 'package:turf_cricket/src/Pages/ScoreCardPage.dart';
+
+import '../CommonParameters/AppBackGround1/Appbg1.dart';
+import '../Pages/ScoreCardPage.dart';
 
 class OtpVerification extends StatefulWidget {
   final String phoneNumber;
@@ -11,8 +12,10 @@ class OtpVerification extends StatefulWidget {
 }
 
 class _OtpVerificationState extends State<OtpVerification> {
-  final List<TextEditingController> _otpControllers =
-  List.generate(4, (_) => TextEditingController());
+  final List<TextEditingController> _otpControllers = List.generate(
+    4,
+    (_) => TextEditingController(),
+  );
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -22,9 +25,7 @@ class _OtpVerificationState extends State<OtpVerification> {
         children: [
           Container(
             height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              gradient: Appbg1.mainGradient,
-            ),
+            decoration: BoxDecoration(gradient: Appbg1.mainGradient),
           ),
           Positioned(
             top: 200,
@@ -122,10 +123,12 @@ class _OtpVerificationState extends State<OtpVerification> {
               iconSize: 40.0,
               tooltip: 'Verify OTP',
               onPressed: () {
-                Navigator.push(context,
-                MaterialPageRoute(builder: (context)=>Board()));
-                  // Proceed with OTP verification logic here
-                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Board()),
+                );
+                // Proceed with OTP verification logic here
+              },
             ),
           ),
         ],

@@ -4,7 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:TURF_TOWN_/src/views/ScoreCard.dart';
 import 'package:TURF_TOWN_/src/viewmodels/ScoreController.dart';
 import 'package:TURF_TOWN_/src/widgets/Navigation_bar.dart';
-
+import 'package:TURF_TOWN_/src/Pages/setting.dart';
+import 'package:TURF_TOWN_/src/Pages/account.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -88,13 +89,19 @@ class _HomeState extends State<Home> {
                               IconButton(
                                 icon: Icon(Icons.person, color: Colors.white),
                                 onPressed: () {
-                                  // profile icon pressed
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context)=> ProfileScreen())
+                                  );
                                 },
                               ),
                               IconButton(
                                 icon: Icon(Icons.settings, color: Colors.white),
                                 onPressed: () {
-                                  // settings icon pressed
+                                      Navigator.push(
+                                        context,
+                                      MaterialPageRoute(builder: (context)=> SettingsScreen())
+                                      );
                                 },
                               ),
                             ],

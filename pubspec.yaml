@@ -34,6 +34,7 @@ dependencies:
   google_fonts: ^6.3.2
   provider: ^6.1.5+1
   carousel_slider: ^5.1.1
+  flutter_svg: ^2.0.9
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -71,6 +72,17 @@ flutter:
     - assets/images/cri_slider.png
     - assets/images/foot_slider.png
     - assets/images/badminton_slider.png
+    - assets/images/book.svg
+    - assets/images/filled.svg
+    - assets/images/fluent.svg
+    - assets/images/Group.svg
+    - assets/images/spanner.svg
+    - assets/images/Vec.svg
+    - assets/images/logout.png
+    - assets/images/Vector.svg
+    - assets/images/share.svg
+    - assets/images/supporthead.svg
+    - assets/images/profilefilled.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

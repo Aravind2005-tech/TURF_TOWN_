@@ -3,6 +3,7 @@ import 'package:TURF_TOWN_/src/CommonParameters/AppBackGround1/Appbg1.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:TURF_TOWN_/src/views/ScoreCard.dart';
 import 'package:TURF_TOWN_/src/viewmodels/ScoreController.dart';
+import 'package:TURF_TOWN_/src/widgets/Navigation_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,92 +13,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // We STILL keep this. The Home page needs to know the active index.
   int _selectedIndex = 2; // 2 = Home
 
-  Widget _buildNavItem(IconData icon, String label, int index) {
-    bool isSelected = _selectedIndex == index;
-    Color unselectedColor = Colors.grey.shade400;
 
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => setState(() => _selectedIndex = index),
-        child: Container(
-          height: 90,
-          color: Colors.transparent,
-          child: Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.center,
-            children: [
-              AnimatedOpacity(
-                duration: const Duration(milliseconds: 200),
-                opacity: isSelected ? 0.0 : 1.0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(height: 10),
-                    Icon(icon, size: 24, color: unselectedColor),
-                    SizedBox(height: 4),
-                    Text(
-                      label,
-                      style: TextStyle(color: unselectedColor, fontSize: 12),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-              AnimatedPositioned(
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-                bottom: isSelected ? 25 : 10,
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 200),
-                  opacity: isSelected ? 1.0 : 0.0,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        height: 64,
-                        width: 64,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: const Color(0xFF4A3F9E),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
-                                blurRadius: 8,
-                                offset: Offset(0, 2),
-                              )
-                            ]),
-                        child: Icon(icon, color: Colors.white, size: 30),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        label,
-                        style: TextStyle(
-                          color: isSelected ? Colors.white : unselectedColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+      extendBody: true, // This is perfect for a custom nav bar
+
+      // 2. ADD THE bottomNavigationBar PROPERTY
+      bottomNavigationBar: Navigation_bar(
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          // You can add other logic here, like navigating
+          // to different pages using a PageView or Navigator
+        },
+      ),
+
       body: Stack(
         children: [
           Container(
@@ -115,6 +52,7 @@ class _HomeState extends State<Home> {
                       top: 50,
                       left: 20,
                       right: 20,
+                      // ... (Your existing header code - no change)
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -168,6 +106,7 @@ class _HomeState extends State<Home> {
                       top: 120,
                       left: 20,
                       right: 20,
+                      // ... (Your existing search bar - no change)
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
@@ -192,6 +131,7 @@ class _HomeState extends State<Home> {
                       left: 20,
                       right: 20,
                       height: 160,
+                      // ... (Your existing "cri_slider" horizontal list - no change)
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
@@ -248,12 +188,12 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                       ),
-
                     ),
                     Positioned(
                       top: 370,
                       left: 20,
                       right: 20,
+                      // ... (Your existing "Book a nearby Venue" row - no change)
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -281,6 +221,7 @@ class _HomeState extends State<Home> {
                       left: 20,
                       right: 20,
                       height: 85,
+                      // ... (Your existing "page3.png" horizontal list - no change)
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
@@ -343,57 +284,8 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          Positioned(
-            bottom: 12,
-            left: 12,
-            right: 12,
-            child: Container(
-              height: 90,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: 70,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color:  Color(0x80140088),
-                        borderRadius: BorderRadius.circular(50.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.4),
-                            blurRadius: 10,
-                            offset: Offset(0, 4),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: 90,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _buildNavItem(Icons.stadium_outlined, "Venue", 0),
-                        _buildNavItem(Icons.history, "Recently Played", 1),
-                        _buildNavItem(Icons.home_outlined, "Home", 2),
-                        _buildNavItem(Icons.bluetooth, "Connection", 3),
-                        _buildNavItem(Icons.notifications_outlined, "Alerts", 4),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
         ],
       ),
     );
   }
 }
-

@@ -1,4 +1,6 @@
 import 'package:TURF_TOWN_/src/Pages/Phone_no.dart';
+import 'package:TURF_TOWN_/src/views/Home.dart';
+import 'package:TURF_TOWN_/src/widgets/Navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart'; // 👈 Add this import
@@ -30,7 +32,7 @@ class FigmaToCodeApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SlidingPage(), // 👈 Your scoreboard page
+        home: Home(), // 👈 Your scoreboard page
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(
             Theme.of(context).textTheme,

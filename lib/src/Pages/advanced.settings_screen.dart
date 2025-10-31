@@ -1,106 +1,105 @@
+import 'package:TURF_TOWN_/src/Pages/team_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class Advancedvsettings extends StatelessWidget {
-  const Advancedvsettings({super.key});
+class Advanced extends StatelessWidget {
+  const Advanced({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          height: 800,
-          child: Stack(
-            children: [
-              // 🔹 Background Gradient
-              Positioned.fill(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment(0.5, 0.0),
-                      end: Alignment(0.5, 0.9),
-                      colors: [Color(0xFF140088), Colors.black],
-                    ),
-                  ),
-                ),
-              ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Cricket Scorer',
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.black,
+        textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFF140088),
+          secondary: Color(0xFF00BCD4),
+        ),
+      ),
+      home: const MatchSettingsPage(),
+    );
+  }
+}
 
-              // 🔹 SVG Icons from assets
-              Positioned(
-                left: 20,
-                top: 20,
-                child: SvgPicture.asset(
-                  'assets/apple.svg',
-                  width: 40,
-                  height: 40,
-                  color: Colors.white,
-                ),
-              ),
-              Positioned(
-                left: 80,
-                top: 20,
-                child: SvgPicture.asset(
-                  'assets/Group-1.svg',
-                  width: 40,
-                  height: 40,
-                  color: Colors.white,
-                ),
-              ),
-              Positioned(
-                right: 20,
-                top: 20,
-                child: SvgPicture.asset(
-                  'assets/ix_support.svg',
-                  width: 40,
-                  height: 40,
-                  color: Colors.white,
-                ),
-              ),
-              Positioned(
-                left: 20,
-                bottom: 20,
-                child: SvgPicture.asset(
-                  'assets/picon_on.svg',
-                  width: 50,
-                  height: 50,
-                  color: Colors.greenAccent,
-                ),
-              ),
-              Positioned(
-                right: 20,
-                bottom: 20,
-                child: SvgPicture.asset(
-                  'assets/Rectangle 4.svg',
-                  width: 60,
-                  height: 60,
-                ),
-              ),
+class MatchSettingsPage extends StatefulWidget {
+  const MatchSettingsPage({super.key});
 
-              // 🔹 Header Text
-              const Positioned(
-                left: 10,
-                top: 100,
-                child: SizedBox(
-                  width: 222,
-                  height: 49,
-                  child: Text.rich(
+  @override
+  State<MatchSettingsPage> createState() => _MatchSettingsPageState();
+}
+
+class _MatchSettingsPageState extends State<MatchSettingsPage> {
+  bool noBallEnabled = false;
+  bool wideBallEnabled = false;
+
+  final TextEditingController noBallController = TextEditingController();
+  final TextEditingController wideBallController = TextEditingController();
+
+  int get noBallRuns =>
+      int.tryParse(noBallController.text.trim().isEmpty ? '0' : noBallController.text) ?? 0;
+  int get wideBallRuns =>
+      int.tryParse(wideBallController.text.trim().isEmpty ? '0' : wideBallController.text) ?? 0;
+
+  @override
+  void dispose() {
+    noBallController.dispose();
+    wideBallController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Column(
+        children: [
+          // 🔹 Gradient AppBar Header
+          Container(
+            width: double.infinity,
+            height: 140,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF283593),
+                  Color(0xFF1A237E),
+                  Color(0xFF000000),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.0, 0.4, 1.0],
+              ),
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(24),
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: w * 0.06, vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // 🏏 Left Title
+                  Text.rich(
                     TextSpan(
                       children: [
                         TextSpan(
                           text: 'Cricket ',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 40,
+                            fontSize: w * 0.09,
                             fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         TextSpan(
                           text: 'Scorer',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
+                            color: Colors.white70,
+                            fontSize: w * 0.045,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w400,
                           ),
@@ -108,65 +107,261 @@ class Advancedvsettings extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-              ),
 
-              // 🔹 Example card for settings section
-              Positioned(
-                left: 30,
-                top: 200,
-                child: Container(
-                  width: 300,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white24),
+                  // 🎧 ⚙️ Right Icons
+                  Row(
+                    children: [
+                      const Icon(Icons.headphones, color: Colors.white70, size: 26),
+                      const SizedBox(width: 14),
+                      IconButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("⚙️ Settings coming soon!"),
+                              backgroundColor: Colors.black87,
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.settings, color: Colors.white70, size: 28),
+                        tooltip: 'Settings',
+                      ),
+                    ],
                   ),
-                  child: const Center(
-                    child: Text(
-                      'Match Settings Placeholder',
-                      style: TextStyle(
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 20),
+
+          // 🔹 Main Body
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1C2026),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 8,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Match Settings",
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontSize: 18,
-                        fontFamily: 'Poppins',
                       ),
                     ),
-                  ),
-                ),
-              ),
+                    const SizedBox(height: 20),
 
-              // 🔹 Save Button
-              Positioned(
-                bottom: 80,
-                left: 90,
-                right: 90,
-                child: ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Settings Saved!'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF19005D),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                    // 🔸 No Ball Card
+                    _buildSettingsCard(
+                      icon: Icons.sports_baseball,
+                      title: "No Ball",
+                      isActive: noBallEnabled,
+                      onToggle: () =>
+                          setState(() => noBallEnabled = !noBallEnabled),
+                      child: noBallEnabled
+                          ? _buildRunInputRow(
+                        label: "No ball run",
+                        icon: Icons.directions_run_rounded,
+                        controller: noBallController,
+                      )
+                          : const SizedBox.shrink(),
                     ),
-                  ),
-                  child: const Text(
-                    'Save Settings',
-                    style: TextStyle(
+
+                    const SizedBox(height: 20),
+
+                    // 🔸 Wide Ball Card
+                    _buildSettingsCard(
+                      icon: Icons.accessibility_new,
+                      title: "Wide Ball",
+                      isActive: wideBallEnabled,
+                      onToggle: () =>
+                          setState(() => wideBallEnabled = !wideBallEnabled),
+                      child: wideBallEnabled
+                          ? _buildRunInputRow(
+                        label: "Wide ball run",
+                        icon: Icons.directions_run_rounded,
+                        controller: wideBallController,
+                      )
+                          : const SizedBox.shrink(),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // 🔹 Save Button (Gradient)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF140088), Colors.black],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>TeamPage()));
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.transparent,
+                              elevation: 0,
+                              behavior: SnackBarBehavior.floating,
+                              content: Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    colors: [Color(0xFF140088), Colors.black],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  "✅ Saved! No Ball: $noBallRuns | Wide Ball: $wideBallRuns",
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.save, color: Colors.white),
+                        label: Text(
+                          "Save Settings",
+                          style: GoogleFonts.poppins(color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          minimumSize: const Size(double.infinity, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 🔹 Settings Card
+  Widget _buildSettingsCard({
+    required IconData icon,
+    required String title,
+    required bool isActive,
+    required VoidCallback onToggle,
+    required Widget child,
+  }) {
+    return Card(
+      color: const Color(0xFF242830),
+      elevation: 6,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 22,
+                  backgroundColor:
+                  isActive ? const Color(0xFF140088) : Colors.white24,
+                  child: Icon(icon, size: 28, color: Colors.white),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
                       color: Colors.white,
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
                     ),
                   ),
                 ),
+                ElevatedButton(
+                  onPressed: onToggle,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF140088),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 8,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    isActive ? "ON" : "OFF",
+                    style: GoogleFonts.poppins(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: isActive ? child : const SizedBox.shrink(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // 🔹 Input Row (Persistent Controller)
+  Widget _buildRunInputRow({
+    required String label,
+    required IconData icon,
+    required TextEditingController controller,
+  }) {
+    return Row(
+      children: [
+        Icon(icon, color: const Color(0xFF00BCD4)),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            label,
+            style: GoogleFonts.poppins(fontSize: 16, color: Colors.white),
+          ),
+        ),
+        SizedBox(
+          width: 50,
+          child: TextField(
+            controller: controller,
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.poppins(color: Colors.white),
+            decoration: const InputDecoration(
+              isDense: true,
+              hintText: '',
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF140088)),
               ),
-            ],
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.cyanAccent),
+              ),
+            ),
           ),
         ),
       ],

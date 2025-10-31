@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:TURF_TOWN_/src/views/ScoreCard.dart';
 class SelectPlayersPage extends StatefulWidget {
   @override
   _SelectPlayersPageState createState() => _SelectPlayersPageState();
@@ -221,6 +221,8 @@ class _SelectPlayersPageState extends State<SelectPlayersPage> {
                                   ),
                                   onPressed: () {
                                     // Proceed logic
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Board()));
+
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text("Proceeding to match..."),
@@ -246,7 +248,7 @@ class _SelectPlayersPageState extends State<SelectPlayersPage> {
                                       const SizedBox(width: 10),
                                       // sized image won't cause overflow
                                       Image.asset(
-                                        'assets/mdi_cricket.png',
+                                        'assets/images/mdi_cricket.svg',
                                         width: 20,
                                         height: 20,
                                         fit: BoxFit.contain,

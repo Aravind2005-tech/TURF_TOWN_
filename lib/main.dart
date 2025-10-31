@@ -8,6 +8,7 @@ import 'package:TURF_TOWN_/src/views/ScoreCard.dart';
 import 'package:TURF_TOWN_/src/viewmodels/ScoreManager.dart'; // 👈 Import your ScoreManager file
 import 'package:TURF_TOWN_/src/viewmodels/ScoreController.dart';
 import 'package:TURF_TOWN_/src/views/Sliding_page.dart';
+import 'package:TURF_TOWN_/src/Pages/advanced.settings_screen.dart';
  // This file will be auto-generated
 
 void main() {// 👈 Opens or creates your local ObjectBox database
@@ -32,7 +33,7 @@ class FigmaToCodeApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Home(), // 👈 Your scoreboard page
+        home: SlidingPage(), // 👈 Your scoreboard page
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(
             Theme.of(context).textTheme,

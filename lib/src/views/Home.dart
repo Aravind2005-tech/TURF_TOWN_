@@ -6,6 +6,7 @@ import 'package:TURF_TOWN_/src/viewmodels/ScoreController.dart';
 import 'package:TURF_TOWN_/src/widgets/Navigation_bar.dart';
 import 'package:TURF_TOWN_/src/Pages/setting.dart';
 import 'package:TURF_TOWN_/src/Pages/account.dart';
+import 'package:TURF_TOWN_/src/Pages/team_page.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -146,7 +147,7 @@ class _HomeState extends State<Home> {
                             InkWell(
                               onTap: () {
                                 print("Cricket image clicked!");
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Board()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>TeamPage()));
                                 // Add your navigation or logic here
                               },
                               borderRadius: BorderRadius.circular(15.0),

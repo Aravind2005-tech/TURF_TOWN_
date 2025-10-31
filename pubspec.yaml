@@ -78,6 +78,14 @@ flutter:
     - assets/images/Group-1.svg
     - assets/images/picon_on.svg
     - assets/images/Rectangle 4.svg
+    - assets/images/mdi_cricket.svg
+    - assets/images/mdi_plus-circle-outline.svg
+    - assets/images/Group.svg
+    - assets/images/ix_support.svg
+    - assets/images/Vector.svg
+    - assets/images/Rectangle 4.svg
+    - assets/images/picon_on.svg
+    - assets/images/mdi_cricket.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

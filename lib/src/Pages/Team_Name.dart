@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(const FigmaToCodeApp());
@@ -91,10 +92,25 @@ class _TeamNameScreenState extends State<TeamNameScreen> {
                             ],
                           ),
                         ),
-                        Icon(
-                          Icons.settings,
-                          color: Colors.white,
-                          size: w * 0.07,
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/ix_support.svg',
+                              width: w * 0.065,
+                              height: w * 0.065,
+                              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                            ),
+                            SizedBox(width: w * 0.025),
+                            Opacity(
+                              opacity: 0.90,
+                              child: SvgPicture.asset(
+                                'assets/Group.svg',
+                                width: w * 0.065,
+                                height: w * 0.065,
+                                colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

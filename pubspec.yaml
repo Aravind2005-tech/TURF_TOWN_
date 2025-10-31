@@ -33,6 +33,7 @@ dependencies:
   objectbox: ^5.0.1
   google_fonts: ^6.3.2
   provider: ^6.1.5+1
+  flutter_svg: ^2.0.7
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -63,7 +64,20 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/appbar.png
+    - assets/Group.svg
+    - assets/Group 3.svg
+    - assets/Group 3-1.svg
+    - assets/ix_support.svg
+    - assets/material-symbols_arrow-drop-down-circle-outline.svg
+    - assets/mdi_bell-outline.svg
+    - assets/mdi_cricket.svg
+    - assets/mdi_plus-circle-outline.svg
+    - assets/picon_on.svg
+    - assets/Rectangle 4.svg
+    - assets/Vector.svg
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

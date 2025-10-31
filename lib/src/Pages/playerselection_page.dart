@@ -38,41 +38,73 @@ class _SelectPlayersPageState extends State<SelectPlayersPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  // crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    SizedBox(height: 80),
-
-                    Padding(
-                      padding: EdgeInsets.only(top: 3.0),
-                      child: IconButton(
-                        icon: Icon(Icons.menu),
-                        color: Colors.white,
-                        iconSize: 30.0,
-                        tooltip: 'Verify OTP',
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Board()),
-                          );
-                        },
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.menu),
+                            color: Colors.white,
+                            iconSize: 30.0,
+                            tooltip: 'Menu',
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Board(),
+                                ),
+                              );
+                            },
+                          ),
+                          Text(
+                            'Cricket',
+                            style: TextStyle(fontSize: 35, color: Colors.white),
+                          ),
+                          SizedBox(width: 5),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15.0),
+                            child: Text(
+                              'Scorer',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      'Cricket',
-                      style: TextStyle(fontSize: 35, color: Colors.white),
-                    ),
-                    SizedBox(width: 5),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: Text(
-                        'Scorer',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.headphones),
+                            color: Colors.white,
+                            iconSize: 30.0,
+                            tooltip: 'Audio',
+                            onPressed: () {
+                              // Handle headphone icon press
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.settings),
+                            color: Colors.white,
+                            iconSize: 30.0,
+                            tooltip: 'Settings',
+                            onPressed: () {
+                              // Handle settings icon press
+                            },
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
+                SizedBox(height: 20),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   padding: const EdgeInsets.all(20),

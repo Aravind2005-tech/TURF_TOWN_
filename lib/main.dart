@@ -1,7 +1,8 @@
+import 'package:TURF_TOWN_/src/Pages/networkerrorpage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:TURF_TOWN_/src/Pages/playerselection_page.dart';;
 
-import 'package:TURF_TOWN_/src/Pages/ScoreCardPage.dart';
 void main() {
   runApp(const FigmaToCodeApp());
 }
@@ -14,12 +15,10 @@ class FigmaToCodeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:Board() ,
+      home: Networkerror(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
-        ),
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
       ),
     );
   }

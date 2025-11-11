@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Navigation_bar extends StatelessWidget {
   final int currentIndex;
-  final Function(int) onTap; // Callback function
+  final Function(int) onTap;
 
   const Navigation_bar({
     Key? key,
@@ -10,16 +10,13 @@ class Navigation_bar extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
 
-  // I moved your _buildNavItem method here.
-  // I just changed 'setState' to call 'onTap'
-  // and '_selectedIndex' to 'currentIndex'.
   Widget _buildNavItem(IconData icon, String label, int index) {
-    bool isSelected = currentIndex == index;
-    Color unselectedColor = Colors.grey.shade400;
+    final bool isSelected = currentIndex == index;
+    final Color unselectedColor = Colors.grey.shade400;
 
     return Expanded(
       child: GestureDetector(
-        onTap: () => onTap(index), // Use the callback
+        onTap: () => onTap(index),
         child: Container(
           height: 90,
           color: Colors.transparent,
@@ -34,9 +31,9 @@ class Navigation_bar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Icon(icon, size: 24, color: unselectedColor),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       label,
                       style: TextStyle(color: unselectedColor, fontSize: 12),
@@ -60,18 +57,19 @@ class Navigation_bar extends StatelessWidget {
                         height: 64,
                         width: 64,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: const Color(0xFF4A3F9E),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
-                                blurRadius: 8,
-                                offset: Offset(0, 2),
-                              )
-                            ]),
+                          shape: BoxShape.circle,
+                          color: const Color(0xFF4A3F9E),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
                         child: Icon(icon, color: Colors.white, size: 30),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         label,
                         style: TextStyle(
@@ -95,13 +93,9 @@ class Navigation_bar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // This is your exact UI code from the Positioned widget,
-    // just wrapped in a Container.
     return Container(
       height: 90,
-      // The original Positioned had 'bottom: 12, left: 12, right: 12'
-      // We can achieve the same "floating" look with a simple margin.
-      margin: EdgeInsets.only(left: 12, right: 12, bottom: 12),
+      margin: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -112,14 +106,14 @@ class Navigation_bar extends StatelessWidget {
             height: 70,
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0x80140088),
+                color: const Color(0xff34345a),
                 borderRadius: BorderRadius.circular(50.0),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.4),
                     blurRadius: 10,
-                    offset: Offset(0, 4),
-                  )
+                    offset: const Offset(0, 4),
+                  ),
                 ],
               ),
             ),
@@ -133,7 +127,7 @@ class Navigation_bar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildNavItem(Icons.stadium_outlined, "Venue", 0),
-                _buildNavItem(Icons.history, "Recently Played", 1),
+                _buildNavItem(Icons.history, "History", 1),
                 _buildNavItem(Icons.home_outlined, "Home", 2),
                 _buildNavItem(Icons.bluetooth, "Connection", 3),
                 _buildNavItem(Icons.notifications_outlined, "Alerts", 4),

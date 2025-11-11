@@ -37,15 +37,7 @@ class ProfileScreen extends StatelessWidget {
                         // 🔙 Back + Title
                         Row(
                           children:  [
-                            IconButton(
-                              icon: Icon(Icons.arrow_back, color: Colors.white),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context)=> SettingsScreen())
-                                );
-                              },
-                            ),
+
                             Text(
                               "Profile",
                               style: TextStyle(

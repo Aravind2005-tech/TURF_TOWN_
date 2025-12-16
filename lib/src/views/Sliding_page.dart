@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:TURF_TOWN_/src/CommonParameters/AppBackGround1/Appbg1.dart';
 import 'package:TURF_TOWN_/src/Pages/Phone_no.dart';
 import 'package:TURF_TOWN_/main.dart';
+
 class SlidingPage extends StatefulWidget {
   @override
   _SlidingPageState createState() => _SlidingPageState();
@@ -18,25 +19,20 @@ class _SlidingPageState extends State<SlidingPage> {
   ];
 
   @override
-
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-                gradient: Appbg1.mainGradient),
+            decoration: BoxDecoration(gradient: Appbg1.mainGradient),
           ),
-
           CarouselSlider.builder(
             itemCount: pages.length,
             itemBuilder: (context, index, realIdx) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                   const SizedBox(height: 100),
+                  const SizedBox(height: 100),
                   Text(
                     pages[index]['text']!,
                     style: const TextStyle(
@@ -63,7 +59,7 @@ class _SlidingPageState extends State<SlidingPage> {
               autoPlayAnimationDuration: const Duration(milliseconds: 800),
               enlargeCenterPage: true,
               viewportFraction: 1.0,
-              enableInfiniteScroll: true,
+              enableInfiniteScroll: false,
               onPageChanged: (index, reason) {
                 setState(() {
                   _currentIndex = index;
@@ -72,9 +68,9 @@ class _SlidingPageState extends State<SlidingPage> {
             ),
           ),
 
-          // Bottom-centered dots
+
           Positioned(
-            bottom: 110, // Increase bottom to move dots above the Start button
+            bottom: 110,
             left: 0,
             right: 0,
             child: Row(
@@ -94,7 +90,7 @@ class _SlidingPageState extends State<SlidingPage> {
               }).toList(),
             ),
           ),
-          //Start button (only on last page)
+
           if (_currentIndex == pages.length - 1)
             Positioned(
               bottom: 30,
@@ -103,15 +99,18 @@ class _SlidingPageState extends State<SlidingPage> {
               child: Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigate to your main screen
-                    print("Start button pressed");
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>PhoneNumberPage()));
 
+                    print("Start button pressed");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PhoneNumberPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0x8000C4FF),
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),

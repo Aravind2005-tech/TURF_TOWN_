@@ -29,8 +29,9 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
             top: 230,
             left: 100,
             child: Text(
-              'Enter your Phone\nNumber',
-              textAlign: TextAlign.center,
+
+              'Enter your Phone \nNumber',
+               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24,
                 color: Colors.white,

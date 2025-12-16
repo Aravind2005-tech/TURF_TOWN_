@@ -43,6 +43,7 @@ class _BoardScreenState extends State<BoardScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
+
     void _showExtraRunDialog(BuildContext context, String extraType) {
       showDialog(
         context: context,
@@ -470,6 +471,9 @@ class _BoardScreenState extends State<BoardScreen> {
               ),
             ),
           ),
+
+
+
           Positioned(
             right: 20,
             bottom: 20,

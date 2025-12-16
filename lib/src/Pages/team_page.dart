@@ -466,7 +466,7 @@ class _TeamPageState extends State<TeamPage> {
   void _showTeamPicker(String label, String? currentValue, Function(String?) onChanged) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF1C2026),
+      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -494,7 +494,7 @@ class _TeamPageState extends State<TeamPage> {
             const SizedBox(height: 16),
             ...teams.map((team) => ListTile(
               title: Text(team),
-              trailing: currentValue == team ? const Icon(Icons.check, color: Color(0xFF00C4FF)) : null,
+              trailing: currentValue == team ? const Icon(Icons.check, color: Colors.white) : null,
               onTap: () {
                 onChanged(team);
                 Navigator.pop(context);
@@ -509,7 +509,7 @@ class _TeamPageState extends State<TeamPage> {
   void _showTossDecisionPicker(String? currentValue, Function(String?) onChanged) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF1C2026),
+      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),

@@ -247,12 +247,12 @@ class _SelectPlayersPageState extends State<SelectPlayersPage> {
                                       ),
                                       const SizedBox(width: 10),
                                       // sized image won't cause overflow
-                                      Image.asset(
-                                        'assets/images/mdi_cricket.svg',
-                                        width: 20,
-                                        height: 20,
-                                        fit: BoxFit.contain,
-                                      ),
+                                      // Image.asset(
+                                      //   'assets/images/mdi_cricket.svg',
+                                      //   width: 20,
+                                      //   height: 20,
+                                      //   fit: BoxFit.contain,
+                                      // ),
                                     ],
                                   ),
                                 ),

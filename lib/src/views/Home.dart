@@ -1,3 +1,7 @@
+// Added these imports for location
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+
 import 'package:TURF_TOWN_/src/Pages/Phone_no.dart';
 import 'package:TURF_TOWN_/src/Pages/privacy.dart';
 import 'package:TURF_TOWN_/src/views/Venue.dart';
@@ -21,12 +25,13 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   int _selectedIndex = 2;
 
+  // No changes in this part
   final List<Widget> _pages = [
     CricketScorerHeader(),
-    PhoneNumberPage(),
-    const HomeContent(),
-    PrivacyScreen(),
-    SettingsScreen(),
+    HomeContent(), // This will now create the StatefulWidget
+    HomeContent(),
+    HomeContent(),
+    HomeContent(),
   ];
 
   void _handleNavTap(int index) {
@@ -47,9 +52,83 @@ class HomeState extends State<Home> {
   }
 }
 
-class HomeContent extends StatelessWidget {
+//
+// --- MODIFICATIONS START HERE ---
+//
+// 1. Converted HomeContent to a StatefulWidget
+class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
 
+  @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
+  // 2. Added state variable to hold the location name
+  String _currentLocationName = "Loading...";
+
+  // 3. Added initState to call the location function when the widget loads
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+
+  // 4. Added the function to get and set the location
+  Future<void> _getCurrentLocation() async {
+    try {
+      // Check if location services are enabled
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        setState(() => _currentLocationName = "Enable GPS");
+        return;
+      }
+
+      // Check for location permissions
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          setState(() => _currentLocationName = "Grant Permission");
+          return;
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        setState(
+                () => _currentLocationName = "Permission Denied");
+        return;
+      }
+
+      // Get the current position
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+
+      // Get placemark from coordinates
+      List<Placemark> placemarks =
+      await placemarkFromCoordinates(position.latitude, position.longitude);
+
+      // Extract a readable name
+      if (placemarks.isNotEmpty) {
+        Placemark place = placemarks.first;
+        String name = place.subLocality ?? place.locality ?? "Unknown Location";
+
+        // Truncate if too long, just like "Periya Muthali..."
+        if (name.length > 15) {
+          name = "${name.substring(0, 15)}...";
+        }
+
+        setState(() {
+          _currentLocationName = name;
+        });
+      }
+    } catch (e) {
+      print("Error getting location: $e");
+      setState(() => _currentLocationName = "Error");
+    }
+  }
+
+  // 5. Moved the original build method here
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -90,9 +169,12 @@ class HomeContent extends StatelessWidget {
                                     fontSize: 10,
                                   ),
                                 ),
-                                const Text(
-                                  "Periya Muthali...",
-                                  style: TextStyle(
+                                //
+                                // 6. Replaced the hard-coded text with the state variable
+                                //
+                                Text(
+                                  _currentLocationName,
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w500,
@@ -102,6 +184,7 @@ class HomeContent extends StatelessWidget {
                             ),
                           ],
                         ),
+                        // --- The rest of your code is unchanged ---
                         Row(
                           children: [
                             IconButton(
@@ -241,26 +324,25 @@ class HomeContent extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 80),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     // Add your function or navigation code here
-                        //       Navigator.push(
-                        //         context,
-                        //         MaterialPageRoute(
-                        //           builder: (context) => CricketScorerHeader(),
-                        //         ),
-                        //       );
-                        //     print("See All tapped!");
-                        //   },
-                        //   child: Text(
-                        //     "See All",
-                        //     style: TextStyle(
-                        //       color: Colors.white.withOpacity(0.7),
-                        //       fontSize: 18,
-                        //     ),
-                        //   ),
-                        // )
-
+                        GestureDetector(
+                          onTap: () {
+                            // Add your function or navigation code here
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CricketScorerHeader(),
+                              ),
+                            );
+                            print("See All tapped!");
+                          },
+                          child: Text(
+                            "See All",
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.7),
+                              fontSize: 12,
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
